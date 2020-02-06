@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { Drawer, IconButton, Typography } from '@material-ui/core';
+import { Drawer, Typography } from '@material-ui/core';
 import Text from '../../../elements/Text';
-import { MenuOutlined } from '@material-ui/icons';
+// import { MenuOutlined } from '@material-ui/icons';
 // import { IMAGES } from '../../../../configs';
 import DrawerList from './DrawerList';
 
 const DrawerMenu = props => {
-  const { classes, open, handleDrawer } = props;
+  const { classes, open } = props;
   return (
     <Drawer
       anchor="left"
@@ -22,12 +22,13 @@ const DrawerMenu = props => {
     >
       <div className={clsx(classes.drawerHeader, classes.shadowTop)}>
         {/* <img src={IMAGES.LOGO} style={{ width: 130, marginRight: 36 }} /> */}
-        <div style={{ textAlign: 'center', flex: '1' }}>
-          <Typography variant="h3">OCR</Typography>
+        <div style={{ textAlign: 'left', width: 200, marginLeft: 16 }}>
+          <Typography className={classes.drawerHeaderText} variant="h4">OCR</Typography>
+          <div className={classes.line} />
         </div>
-        <IconButton onClick={() => handleDrawer(false)}>
+        {/* <IconButton onClick={() => handleDrawer(false)}>
           <MenuOutlined />
-        </IconButton>
+        </IconButton> */}
       </div>
       <div className={classes.space} />
       <DrawerList />

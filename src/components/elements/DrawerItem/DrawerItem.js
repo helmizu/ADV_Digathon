@@ -31,7 +31,7 @@ const DrawerItem = props => {
           {children}
         </Fragment>
       )}
-      <Typography className={classes.title}>{text}</Typography>
+      <Typography className={classes.title} variant="h6">{text}</Typography>
     </ListItem>
   );
 };

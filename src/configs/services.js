@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const instance = Axios.create({
-  baseURL: 'http://localhost:8080/api'
+  baseURL: 'http://demo9447582.mockable.io'
 });
 
 const get = async (path, params = {}) => {
@@ -36,6 +36,7 @@ const put = async (path, body = {}, params = {}) => {
 const ENDPOINT = {
   generateDraft: async (body = {}) => await post('/generateDraft', body),
   getProject: async (params = {}) => await get('/project', params),
+  getCategory: async (params = {}) => await get('/catalog', params),
   generateFinal: async (body = {}, params = {}) => await put('/generateFinal', body, params),
 };
 

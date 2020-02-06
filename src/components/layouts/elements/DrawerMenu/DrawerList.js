@@ -7,16 +7,18 @@ const DrawerList = () => {
   return (
     <List>
       {ROUTES.map((route, index) => {
-        const { title = '', path = '', Icon = null } = route;
-        return (
-          <DrawerItem
-            key={index}
-            text={title}
-            to={path}
-          >
-            {Icon && <Icon/>}
-          </DrawerItem>
-        );
+        const { title = '', path = '', Icon = null, showInDrawer = false } = route;
+        if (showInDrawer)
+          return (
+            <DrawerItem
+              key={index}
+              text={title}
+              to={path}
+            >
+              {Icon && <Icon/>}
+            </DrawerItem>
+          );
+        return null;
       })}
     </List>
   );

@@ -13,8 +13,8 @@ const initialPalate = {
   },
   secondary: {
     light: '#c24b8e',
-    main: '#b31e72',
-    dark: '#7d154f',
+    main: '#B1BBBF',
+    dark: '#2E434D',
     moreLight: '#faeff5',
     contrastText: COLOR_WHITE
   },
@@ -25,7 +25,7 @@ const initialPalate = {
     contrastText: COLOR_WHITE
   },
   appBar: {
-    main: '#FFFFFF'
+    main: '#2E434D'
   },
   error: {
     main: '#c72037'

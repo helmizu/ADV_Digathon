@@ -4,7 +4,7 @@ import { FormControl, TextField } from '@material-ui/core';
 import { noop } from '../../../utils';
 import useStyles from './useStyles';
 
-const FieldLabel = (props = {}) => {
+const UploadFile = (props = {}) => {
   const classes = useStyles();
   const { onChange, value, required } = props;
   return (
@@ -22,15 +22,15 @@ const FieldLabel = (props = {}) => {
   );
 };
 
-export default FieldLabel;
+export default UploadFile;
 
-FieldLabel.propTypes = {
+UploadFile.propTypes = {
   onChange: PropTypes.func,
   required: PropTypes.bool,
   value: PropTypes.string
 };
 
-FieldLabel.defaultProps = {
+UploadFile.defaultProps = {
   onChange: noop,
   required: false,
   value: ''

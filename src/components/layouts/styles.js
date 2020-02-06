@@ -56,9 +56,15 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
     zIndex: '9999 !important'
   },
+  drawerHeaderText: {
+    color: theme.palette.secondary.contrastText,
+    fontWeight: '500',
+    padding: '24px 24px 24px 0',
+  },
   drawerPaper: {
+    backgroundColor: theme.palette.secondary.dark,
     border: 0,
-    width: drawerWidth
+    width: drawerWidth,
   },
   footer: {
     display: 'none',
@@ -77,6 +83,11 @@ const styles = theme => ({
   },
   hide: {
     display: 'none'
+  },
+  line: {
+    backgroundColor: theme.palette.secondary.main,
+    height: '1.5px',
+    width: 'calc(100%)',
   },
   listItemAccount: {
     cursor: 'pointer',
@@ -157,7 +168,7 @@ const styles = theme => ({
   userName: {
     textOverflow: 'ellipse',
     width: 90
-  }
+  },
 });
 
 export default styles;

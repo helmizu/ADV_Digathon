@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import Header from './elements/Header';
+// import Header from './elements/Header';
 import DrawerMenu from './elements/DrawerMenu';
 
 export const PageBase = props => {
@@ -10,14 +10,14 @@ export const PageBase = props => {
   const { classes, children } = props;
   return (
     <div className={classes.root}>
-      <Header handleDrawer={setDrawer} openDrawer={drawer} />
+      {/* <Header handleDrawer={setDrawer} openDrawer={drawer} /> */}
       <DrawerMenu handleDrawer={setDrawer} open={drawer}/>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open
         })}
       >
-        <div className={classes.drawerHeader}/>
+        {/* <div className={classes.drawerHeader}/> */}
         {children}
       </main>
     </div>
