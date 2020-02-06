@@ -1,0 +1,14 @@
+.main.overlay-open {
+  overflow: hidden;
+}
+
+.overlay {
+  background-color: var(--overlay-color);
+  height: calc(100vh - var(--app-header-height));
+  left: 0;
+  position: absolute;
+  top: var(--app-header-height);
+  transition: background-color 0.25s;
+  width: 100vw;
+  z-index: 9999;
+}
