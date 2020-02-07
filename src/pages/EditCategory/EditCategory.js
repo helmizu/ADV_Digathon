@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@material-ui/core';
-// import ENDPOINT from '../../configs/services';
 import FieldLabel, { useFieldLabel } from '../../components/elements/FieldLabel';
 import { noop } from '../../utils';
 import useStyles from './useStyles';
@@ -12,15 +11,21 @@ import { useParams } from 'react-router-dom';
 const useForm = () => {
   const inputCategoryName = useFieldLabel('');
   const inputKeyword = useMultipleFormAddKeyword();
-  // const [dataCategory, setDataCategory] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { categoryId = '' } = useParams();
 
   const getDataProject = async () => {
-    const params = { categoryId };
-    const { success = false, data = []} = await ENDPOINT.getCategory(params);
-    if (success) {
-      inputCategoryName.setValue(data[0].categoryName);
-      inputKeyword.updateValue(data[0].keyword);
+    try {
+      setIsLoading(true);
+      const { success = false, data = {} } = await ENDPOINT.getCategoryDetail(categoryId);
+      if (success) {
+        inputCategoryName.setValue(data.categoryName);
+        inputKeyword.updateValue(data.keyword);
+      }
+    } catch (error) {
+      noop();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,24 +43,23 @@ const useForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const payload = await mappingData();
-    // try {
-    //   setIsLoading(true);
-    //   const payload = mappingData();
-    //   const { success } = await ENDPOINT.generateDraft(payload);
-    //   if (success) {
-    //     window.location.href = '/';
-    //   }
-    // } catch (error) {
-    //   noop();
-    // } finally {
-    //   setIsLoading(false);
-    // }
-    console.log({ payload });
+    try {
+      setIsLoading(true);
+      const payload = await mappingData();
+      const { success } = await ENDPOINT.editCategory(categoryId, payload);
+      if (success) {
+        window.location.href = '/';
+      }
+    } catch (error) {
+      noop();
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {
     formInput: { inputCategoryName, inputKeyword },
+    isLoading,
     onSubmit,
   };
 };

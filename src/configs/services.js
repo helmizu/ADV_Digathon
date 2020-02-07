@@ -1,7 +1,10 @@
 import Axios from 'axios';
 
 const instance = Axios.create({
-  baseURL: 'http://demo9447582.mockable.io'
+  baseURL: 'http://192.168.137.1:9004/api',
+  headers: {
+    'Authorization': 'Basic dGVsa29tZGlnaXRhbHNvbHV0aW9uZDN2OjY5NTg0OWRlLTlmYWEtNGJjMy05ZmIzLTA2NjAzNDQzNWM1OQ=='
+  }
 });
 
 const get = async (path, params = {}) => {
@@ -33,11 +36,17 @@ const put = async (path, body = {}, params = {}) => {
   return data;
 };
 
+const remove = async (path, params) => {
+  const { data } = await instance.delete(path, params);
+  return data;
+};
+
 const ENDPOINT = {
-  generateDraft: async (body = {}) => await post('/generateDraft', body),
-  getProject: async (params = {}) => await get('/project', params),
-  getCategory: async (params = {}) => await get('/catalog', params),
-  generateFinal: async (body = {}, params = {}) => await put('/generateFinal', body, params),
+  getCategory: async (params = {}) => await get('/document/category/v1', params),
+  getCategoryDetail: async (id = '', params = {}) => await get(`/document/category/v1/${id}`, params),
+  addCategory: async (payload = {}) => await post('/document/category/v1', payload),
+  editCategory: async (id = '', payload = {}) => await put(`/document/category/v1/${id}`, payload),
+  deleteCategory: async (id = '', params = {}) => await remove(`/document/category/v1/${id}`, params),
 };
 
 export default ENDPOINT;

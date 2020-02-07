@@ -5,12 +5,20 @@ import CardCategory from '../../components/elements/CardCategory';
 import Header from '../../components/elements/Header';
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(false);
   const [dataCategory, setDataCategory] = useState([]);
 
   const getDataProject = async () => {
-    const { success = false, data = []} = await ENDPOINT.getCategory();
-    if (success) {
-      setDataCategory(data);
+    try {
+      setIsLoading(true);
+      const { success, data } = await ENDPOINT.getCategory();
+      if (success) {
+        setDataCategory(data);
+      }
+    } catch (error) {
+      setDataCategory([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -26,7 +34,9 @@ export default function Home() {
         container
         direction="row"
         justify="flex-start"
+        style={{ padding: 24 }}
       >
+        {isLoading && 'Loading...'}
         {dataCategory.map((item, index) => (
           <Grid item key={index} style={{ padding: 12 }} xs={6}>
             <CardCategory item={item}  />

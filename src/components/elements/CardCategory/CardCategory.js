@@ -6,10 +6,23 @@ import { Link } from 'react-router-dom';
 import useStyles from './useStyles';
 import BodyCardCategory from './BodyCardCategory';
 import { PATH } from '../../../configs/routes';
+import ENDPOINT from '../../../configs/services';
+import { noop } from '../../../utils';
 
 const CardCategory = props => {
   const classes = useStyles();
   const { item: { categoryId = '', categoryName = '', keyword = []} = {} } = props;
+
+  const onDelete = async (id) => {
+    try {
+      const { success } = await ENDPOINT.deleteCategory(id);
+      if (success) {
+        window.location.href = '/';
+      }
+    } catch (error) {
+      noop();
+    }
+  };
 
   return (
     <Card className={classes.root}>
@@ -18,17 +31,18 @@ const CardCategory = props => {
           <Grid
             alignItems="center"
             className={classes.buttonWrapper}
+            container
             direction="row"
             justify="center"
           >
-            <IconButton
-              className={classes.iconButtonEdit}
-            >
-              <Link style={{ color: '#fff' }} to={`${PATH.EDIT_CATEGORY}${categoryId}`}>
+            <Link to={`${PATH.EDIT_CATEGORY}${categoryId}`}>
+              <IconButton
+                className={classes.iconButtonEdit}
+              >
                 <Edit />
-              </Link>
-            </IconButton>
-            <IconButton className={classes.iconButtonDelete}>
+              </IconButton>
+            </Link>
+            <IconButton className={classes.iconButtonDelete} onClick={() => onDelete(categoryId)}>
               <Delete />
             </IconButton>
           </Grid>

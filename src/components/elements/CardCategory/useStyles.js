@@ -14,7 +14,8 @@ const useStyles = makeStyles(() => createStyles({
     width: 32,
     height: 32,
     padding: 0,
-    margin: '0 4px'
+    margin: '0 4px',
+    color: '#fff',
   },
   iconButtonDelete: {
     '&:hover': {
@@ -25,7 +26,8 @@ const useStyles = makeStyles(() => createStyles({
     width: 32,
     height: 32,
     padding: 0,
-    margin: '0 4px'
+    margin: '0 4px',
+    color: '#fff'
   },
   buttonWrapper: {
     padding: '8px 0 0',

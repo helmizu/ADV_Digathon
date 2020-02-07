@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Button } from '@material-ui/core';
-// import ENDPOINT from '../../configs/services';
+import ENDPOINT from '../../configs/services';
 import FieldLabel, { useFieldLabel } from '../../components/elements/FieldLabel';
 import { noop } from '../../utils';
 import useStyles from './useStyles';
@@ -10,6 +10,7 @@ import Header from '../../components/elements/Header';
 const useForm = () => {
   const inputCategoryName = useFieldLabel('');
   const inputKeyword = useMultipleFormAddKeyword();
+  const [isLoading, setIsLoading] = useState(false);
 
   const mappingData = () => {
     const keyword = inputKeyword.multipleValue;
@@ -21,24 +22,23 @@ const useForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const payload = await mappingData();
-    // try {
-    //   setIsLoading(true);
-    //   const payload = mappingData();
-    //   const { success } = await ENDPOINT.generateDraft(payload);
-    //   if (success) {
-    //     window.location.href = '/';
-    //   }
-    // } catch (error) {
-    //   noop();
-    // } finally {
-    //   setIsLoading(false);
-    // }
-    console.log({ payload });
+    try {
+      setIsLoading(true);
+      const payload = await mappingData();
+      const { success } = await ENDPOINT.addCategory(payload);
+      if (success) {
+        window.location.href = '/';
+      }
+    } catch (error) {
+      noop();
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {
     formInput: { inputCategoryName, inputKeyword },
+    isLoading,
     onSubmit,
   };
 };

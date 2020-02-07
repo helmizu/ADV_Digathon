@@ -22,16 +22,21 @@ export default function Home() {
   };
 
   const onTryAPI = async () => {
-    try {
-      setIsLoading(true);
-      const result = await ENDPOINT.getCategory();
-      const resultText = JSON.stringify(result, null, 4);
-      setResponse(resultText);
-    } catch (error) {
-      const errorText = JSON.stringify(error, null, 4);
-      setResponse(errorText);
-    } finally {
-      setIsLoading(false);
+    if (dropdownType.value && uploadFile.value) {
+      const formData = new FormData();
+      formData.append('categoryName', dropdownType.value);
+      formData.append('fileUpload', uploadFile.file, uploadFile.file.name);
+      try {
+        setIsLoading(true);
+        const result = await ENDPOINT.getCategory(formData);
+        const resultText = JSON.stringify(result, null, 4);
+        setResponse(resultText);
+      } catch (error) {
+        const errorText = JSON.stringify(error, null, 4);
+        setResponse(errorText);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -46,7 +51,7 @@ export default function Home() {
   return (
     <section>
       <Header title="Try Your Configuration" />
-      <Grid container>
+      <Grid container style={{ padding: 24 }}>
         <Dropdown {...dropdownType} data={dataCategory} label="Pick File Category.." mappingItem={{ value: 'categoryName', label: 'categoryName' }} />
         <Grid
           alignItems="center"
@@ -55,7 +60,7 @@ export default function Home() {
           justify="center"
         >
           <Grid item xs={10}>
-            <UploadFile {...uploadFile} label="" />
+            <UploadFile {...uploadFile} accept="image/jpeg,image/png,application/pdf" />
           </Grid>
           <Grid item xs>
             <Button className={classes.buttonBlock} onClick={onTryAPI}>Send</Button>
