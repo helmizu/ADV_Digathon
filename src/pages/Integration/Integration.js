@@ -21,14 +21,31 @@ export default function Home() {
     }
   };
 
+  const onUploadFile = async () => {
+    const formData = new FormData();
+    formData.append('file', uploadFile.file, uploadFile.file.name);
+    try {
+      const { success = false, data = {} } = await ENDPOINT.uploadImage(formData);
+      if (success) {
+        const { alias = '' } = data;
+        return alias;
+      }
+      return '';
+    } catch (error) {
+      return '';
+    }
+  };
+
   const onTryAPI = async () => {
     if (dropdownType.value && uploadFile.value) {
-      const formData = new FormData();
-      formData.append('categoryName', dropdownType.value);
-      formData.append('fileUpload', uploadFile.file, uploadFile.file.name);
       try {
         setIsLoading(true);
-        const result = await ENDPOINT.getCategory(formData);
+        const imageURL = await onUploadFile();
+        const payload = {
+          categoryName: dropdownType.value,
+          url: imageURL
+        };
+        const result = await ENDPOINT.tryIntegration(payload);
         const resultText = JSON.stringify(result, null, 4);
         setResponse(resultText);
       } catch (error) {
@@ -37,6 +54,8 @@ export default function Home() {
       } finally {
         setIsLoading(false);
       }
+    } else {
+      alert('input required');
     }
   };
 

@@ -23,7 +23,7 @@ const DrawerMenu = props => {
       <div className={clsx(classes.drawerHeader, classes.shadowTop)}>
         {/* <img src={IMAGES.LOGO} style={{ width: 130, marginRight: 36 }} /> */}
         <div style={{ textAlign: 'left', width: 200, marginLeft: 16 }}>
-          <Typography className={classes.drawerHeaderText} variant="h4">OCR</Typography>
+          <Typography className={classes.drawerHeaderText} variant="h4">Text Detection</Typography>
           <div className={classes.line} />
         </div>
         {/* <IconButton onClick={() => handleDrawer(false)}>

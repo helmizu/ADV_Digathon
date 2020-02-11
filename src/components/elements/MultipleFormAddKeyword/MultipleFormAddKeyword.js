@@ -31,8 +31,8 @@ const MultipleFormAddKeyword = props => {
             <FieldLabel label="Type title name.." margin="none" onChange={onChangeTitle(index)} value={title} />
             <FieldLabel label="Type match text.." margin="none" onChange={onChangeMatch(index)} value={text} />
             <FieldLabel label="Type count match.." margin="none" onChange={onChangeCount(index)} type="number" value={count} />
-            <FieldLabel label="Type before text.." margin="none" onChange={onChangeBefore(index)} value={before} />
-            <FieldLabel label="Type after text.." margin="none" onChange={onChangeAfter(index)} value={after} />
+            <FieldLabel label="Type before text.." margin="none" onChange={onChangeAfter(index)} value={after} />
+            <FieldLabel label="Type after text.." margin="none" onChange={onChangeBefore(index)} value={before} />
             <Grid
               alignItems="center"
               container
@@ -47,6 +47,7 @@ const MultipleFormAddKeyword = props => {
                 <button
                   className={isAdd ? classes.buttonAdd : classes.buttonRemove}
                   onClick={() => isAdd ? onClickAddForm() : onClickRemoveForm(index + 1)}
+                  type="button"
                 >
                   {isAdd ? <Add /> : <Remove />}
                 </button>

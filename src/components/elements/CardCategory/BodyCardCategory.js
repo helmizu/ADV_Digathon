@@ -24,11 +24,11 @@ const BodyCardCategory = props => {
       </Grid>
       <Grid item style={{ padding: 4 }} xs={4}>
         <Typography color="textSecondary" variant="body2">Text Before</Typography>
-        <Typography color="textPrimary" variant="body1">{isEmpty(before)}</Typography>
+        <Typography color="textPrimary" variant="body1">{isEmpty(after)}</Typography>
       </Grid>
       <Grid item style={{ padding: 4 }} xs={4}>
         <Typography color="textSecondary" variant="body2">Text After</Typography>
-        <Typography color="textPrimary" variant="body1">{isEmpty(after)}</Typography>
+        <Typography color="textPrimary" variant="body1">{isEmpty(before)}</Typography>
       </Grid>
     </Grid>
   );

@@ -59,7 +59,7 @@ const styles = theme => ({
   drawerHeaderText: {
     color: theme.palette.secondary.contrastText,
     fontWeight: '500',
-    padding: '24px 24px 24px 0',
+    padding: '16px 24px 8px 0',
   },
   drawerPaper: {
     backgroundColor: theme.palette.secondary.dark,

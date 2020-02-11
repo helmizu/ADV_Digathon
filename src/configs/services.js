@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const instance = Axios.create({
-  baseURL: 'http://192.168.137.1:9004/api',
+  baseURL: 'http://192.168.88.193:9005/api',
   headers: {
     'Authorization': 'Basic dGVsa29tZGlnaXRhbHNvbHV0aW9uZDN2OjY5NTg0OWRlLTlmYWEtNGJjMy05ZmIzLTA2NjAzNDQzNWM1OQ=='
   }
@@ -47,6 +47,8 @@ const ENDPOINT = {
   addCategory: async (payload = {}) => await post('/document/category/v1', payload),
   editCategory: async (id = '', payload = {}) => await put(`/document/category/v1/${id}`, payload),
   deleteCategory: async (id = '', params = {}) => await remove(`/document/category/v1/${id}`, params),
+  tryIntegration: async (payload = {}) => await post(`/document/upload-image-ocr/v1`, payload),
+  uploadImage: async (payload = {}) => await post(`/document/upload/v1`, payload),
 };
 
 export default ENDPOINT;
